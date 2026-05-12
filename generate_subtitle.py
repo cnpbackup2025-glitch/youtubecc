@@ -103,9 +103,10 @@ def extract_audio_from_video(video_path: str, output_dir: str) -> str:
         audio_path,
     ]
     print(f"Extracting audio from: {video_path}")
-    result = subprocess.run(cmd, capture_output=True, text=True)
+    result = subprocess.run(cmd, capture_output=True)
     if result.returncode != 0:
-        raise RuntimeError(f"Failed to extract audio: {result.stderr}")
+        stderr_text = result.stderr.decode("utf-8", errors="replace")
+        raise RuntimeError(f"Failed to extract audio: {stderr_text}")
     return audio_path
 
 
