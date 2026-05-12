@@ -1,0 +1,52 @@
+1
+00:00:00,000 --> 00:00:03,560
+Assalamualaikum warahmatullahi wabarakatuh.
+
+2
+00:00:03,560 --> 00:00:08,000
+Halo semuanya, selamat datang di video kali ini.
+
+3
+00:00:08,000 --> 00:00:14,640
+Hari ini kita akan membahas tentang pentingnya belajar bahasa pemerograman di era di Gital.
+
+4
+00:00:14,640 --> 00:00:21,559
+Banyak orang bertanya bahasa pemerograman apa yang harus di pelajari pertama kali?
+
+5
+00:00:21,559 --> 00:00:26,920
+Menurut saya, Piton adalah pilihan yang sangat baik untuk pemula.
+
+6
+00:00:27,200 --> 00:00:31,640
+Piton mau milikisin taks yang sederhana dan mudah di pahami.
+
+7
+00:00:31,640 --> 00:00:37,760
+Selain itu, Piton juga digunakan di banyak bidang seperti data science.
+
+8
+00:00:37,760 --> 00:00:41,120
+Machine learning dan web development.
+
+9
+00:00:41,120 --> 00:00:45,880
+Namun, yang paling penting bukan bahasa apa yang kamu pilih.
+
+10
+00:00:45,880 --> 00:00:48,760
+Tapi konsistensi dalam belajar.
+
+11
+00:00:48,760 --> 00:00:51,400
+Semoga video ini bermanfaat.
+
+12
+00:00:51,400 --> 00:00:53,799
+Terima kasih sudah menonton.
+
+13
+00:00:53,799 --> 00:00:57,559
+Wassalamualaikum warahmatullahi wabarakatuh.
+

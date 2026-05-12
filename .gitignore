@@ -1,0 +1,12 @@
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+.eggs/
+*.wav
+cookies.txt
+output/video_url.txt
+output/request_info.json
+output/sample_audio.mp3
