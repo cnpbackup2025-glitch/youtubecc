@@ -1,0 +1,89 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YouTube Transcript Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>YouTube Transcript Generator</h1>
+            <p class="subtitle">
+                Tempel link YouTube di bawah dan dapatkan transcript asli berupa teks
+                dari isi video tersebut.
+            </p>
+        </header>
+
+        {% if error %}
+        <div class="alert alert-error" role="alert">
+            <strong>Error:</strong> {{ error }}
+        </div>
+        {% endif %}
+
+        <form action="{{ url_for('transcribe_route') }}" method="post" class="form">
+            <label for="url">Link YouTube</label>
+            <input
+                type="url"
+                id="url"
+                name="url"
+                placeholder="https://www.youtube.com/watch?v=..."
+                value="{{ url or '' }}"
+                required
+                autofocus
+            >
+
+            <details class="advanced">
+                <summary>Opsi lanjutan</summary>
+                <div class="advanced-grid">
+                    <div>
+                        <label for="language">Kode bahasa (opsional)</label>
+                        <input
+                            type="text"
+                            id="language"
+                            name="language"
+                            placeholder="id, en, ja, ..."
+                            maxlength="10"
+                        >
+                        <small>
+                            Kosongkan untuk deteksi otomatis. Contoh:
+                            <code>id</code>, <code>en</code>.
+                        </small>
+                    </div>
+                    <div>
+                        <label for="model">Model Whisper (fallback)</label>
+                        <select id="model" name="model">
+                            <option value="tiny">tiny — paling cepat</option>
+                            <option value="base" selected>base — seimbang</option>
+                            <option value="small">small</option>
+                            <option value="medium">medium — lebih akurat</option>
+                            <option value="large">large — paling akurat</option>
+                        </select>
+                    </div>
+                </div>
+                <label class="checkbox">
+                    <input type="checkbox" name="force_whisper">
+                    Paksa transkripsi ulang dengan Whisper (lewati caption YouTube)
+                </label>
+                <p class="hint">
+                    Secara default, aplikasi mencoba mengambil caption resmi atau
+                    auto-caption dari YouTube terlebih dahulu (cepat). Jika caption
+                    tidak tersedia, audio akan ditranskripsi dengan Whisper
+                    (lebih lambat).
+                </p>
+            </details>
+
+            <button type="submit">Ambil Transcript</button>
+        </form>
+
+        <footer>
+            <p class="hint">
+                Tip: untuk integrasi otomatis, kirim <code>POST</code> ke
+                <code>/api/transcribe</code> dengan body
+                <code>{"url": "..."}</code> dan dapatkan JSON berisi transcript.
+            </p>
+        </footer>
+    </main>
+</body>
+</html>

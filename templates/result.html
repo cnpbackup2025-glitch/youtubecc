@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="id">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Transcript - {{ metadata.title if metadata and metadata.title else 'YouTube' }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <main class="container">
+        <header>
+            <h1>Transcript</h1>
+            <p class="subtitle">
+                <a href="{{ url_for('index') }}">&larr; Buat transcript lain</a>
+            </p>
+        </header>
+
+        {% if metadata %}
+        <section class="card">
+            {% if metadata.thumbnail %}
+            <img class="thumb" src="{{ metadata.thumbnail }}" alt="Thumbnail">
+            {% endif %}
+            <div class="meta">
+                {% if metadata.title %}
+                <h2>{{ metadata.title }}</h2>
+                {% endif %}
+                {% if metadata.uploader %}
+                <p class="uploader">{{ metadata.uploader }}</p>
+                {% endif %}
+                {% if metadata.webpage_url %}
+                <p><a href="{{ metadata.webpage_url }}" target="_blank" rel="noopener">Buka di YouTube</a></p>
+                {% endif %}
+            </div>
+        </section>
+        {% endif %}
+
+        <section class="info">
+            <dl>
+                <dt>Bahasa terdeteksi</dt>
+                <dd>{{ language }}</dd>
+                <dt>Sumber transcript</dt>
+                <dd>
+                    {% if source == 'youtube_captions' %}
+                        Caption resmi YouTube
+                    {% elif source and source.startswith('whisper:') %}
+                        Whisper ({{ source.split(':',1)[1] }})
+                    {% else %}
+                        {{ source }}
+                    {% endif %}
+                </dd>
+            </dl>
+        </section>
+
+        <section>
+            <div class="toolbar">
+                <button type="button" id="copyBtn">Salin teks</button>
+                <a id="downloadBtn" href="#" download="transcript.txt">Unduh .txt</a>
+            </div>
+            <pre id="transcript" class="transcript">{{ text }}</pre>
+        </section>
+    </main>
+
+    <script>
+        (function () {
+            const transcriptEl = document.getElementById('transcript');
+            const copyBtn = document.getElementById('copyBtn');
+            const downloadBtn = document.getElementById('downloadBtn');
+            const text = transcriptEl.textContent;
+
+            copyBtn.addEventListener('click', async () => {
+                try {
+                    await navigator.clipboard.writeText(text);
+                    copyBtn.textContent = 'Tersalin!';
+                    setTimeout(() => (copyBtn.textContent = 'Salin teks'), 1500);
+                } catch (err) {
+                    copyBtn.textContent = 'Gagal menyalin';
+                }
+            });
+
+            const blob = new Blob([text], { type: 'text/plain;charset=utf-8' });
+            downloadBtn.href = URL.createObjectURL(blob);
+        })();
+    </script>
+</body>
+</html>
